@@ -1,9 +1,13 @@
 const express = require('express');
 const app = express();
-
 const { getCoalFactors, getHydroFactors, getAllFactors } = require('./controllers');
-
 const port = 9092;
+
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', 'http://localhost:3000'); // update to match the domain you will make the request from
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+  next();
+});
 
 app.listen(port, () => {
   console.log(`server running on ${port}`);

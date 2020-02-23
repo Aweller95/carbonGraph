@@ -3,7 +3,7 @@ import Chart from 'chart.js';
 Chart.defaults.global.defaultFontFamily = "'PT Sans', sans-serif";
 Chart.defaults.global.legend.display = false;
 
-export const buildChart = (ref, type, data, labels, average, options = {}) => {
+export const buildChart = (ref, type, data, labels, options = {}) => {
   const myChartRef = ref.current.getContext('2d');
 
   new Chart(myChartRef, {
@@ -12,16 +12,10 @@ export const buildChart = (ref, type, data, labels, average, options = {}) => {
       labels,
       datasets: [
         {
-          label: 'Sales',
+          label: 'Intensity Factors',
           data: data,
-          fill: false,
+          fill: true,
           borderColor: '#6610f2',
-        },
-        {
-          label: 'National Average',
-          data: average,
-          fill: false,
-          borderColor: '#E0E0E0',
         },
       ],
     },

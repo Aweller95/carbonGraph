@@ -1,14 +1,14 @@
 import React, { useEffect } from 'react';
 import { buildChart } from '../utils';
-import classes from './Graph.module.css';
+import classes from './LineGraph.module.css';
 
-export const Graph = props => {
-  const { data, average, labels } = props.data;
+export const LineGraph = props => {
+  const { data, labels } = props.data;
   const chartRef = React.createRef();
 
   useEffect(() => {
-    buildChart(chartRef, 'line', data, labels, average);
-  }, [data, average, labels]);
+    buildChart(chartRef, 'line', data, labels);
+  }, [data, labels, chartRef]);
 
   return (
     <div className={classes.graphContainer}>

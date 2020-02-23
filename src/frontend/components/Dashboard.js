@@ -1,35 +1,26 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 import classes from './Dashboard.module.css';
 import chartIcon from '../assets/chart-icon.svg';
-import { Graph } from './Graph';
-import {
-  managerData,
-  nationalAverageData,
-  yearLabels,
-  managerQuarterData,
-  nationalAverageQuarterData,
-  quarterLabels,
-} from '../mockData';
+import { LineGraph } from './LineGraph';
 
-export const Dashboard = (data, labels) => {
+const getData = async () => {
+  const result = await axios.get('http://localhost:9092/api/factors/all');
+  return result;
+};
+
+export const Dashboard = () => {
   const [state, setState] = useState({
-    data: managerData,
-    average: nationalAverageData,
-    labels: yearLabels,
+    data: [],
+    labels: [],
   });
 
-  const handleButtonClick = e => {
-    const { value } = e.target;
-    const isAnnual = value === 'annual';
-
-    const newData = isAnnual ? managerData : managerQuarterData;
-    const newLabels = isAnnual ? yearLabels : quarterLabels;
-    const newAverage = isAnnual ? nationalAverageData : nationalAverageQuarterData;
+  const handleButtonClick = async e => {
+    const { data } = await getData();
 
     setState({
-      data: newData,
-      average: newAverage,
-      labels: newLabels,
+      data: Object.values(data),
+      labels: Object.keys(data),
     });
   };
 
@@ -41,16 +32,10 @@ export const Dashboard = (data, labels) => {
       </header>
 
       <div className={classes.buttonContainer}>
-        <button value="annual" onClick={handleButtonClick}>
-          Annual
-        </button>
-
-        <button value="lastquarter" onClick={handleButtonClick}>
-          Last Quarter
-        </button>
+        <button onClick={handleButtonClick}>Get all intensity data</button>
       </div>
 
-      <Graph data={state} />
+      <LineGraph data={state} />
     </div>
   );
 };
