@@ -1,0 +1,1 @@
+const frontend = require('./frontend');

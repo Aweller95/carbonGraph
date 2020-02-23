@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 
-const { getCoalFactors, getHydroFactors } = require('./controllers');
+const { getCoalFactors, getHydroFactors, getAllFactors } = require('./controllers');
 
 const port = 9092;
 

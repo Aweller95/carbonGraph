@@ -14,9 +14,9 @@ const getHydroFactors = async (req, res) => {
 };
 
 const getAllFactors = async (req, res) => {
-  const data = await getIntensityFactors();
+  const { data } = await getIntensityFactors();
 
-  return data;
+  return data[0];
 };
 
 module.exports = {
