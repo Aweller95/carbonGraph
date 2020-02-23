@@ -16,6 +16,7 @@
     "react-scripts": "3.4.0"
   },
   "scripts": {
+    "start:dev": "yarn start:backend & yarn start:frontend",
     "start:backend": "nodemon ./src/backend",
     "start:frontend": "react-scripts start",
     "build:frontend": "react-scripts build",
